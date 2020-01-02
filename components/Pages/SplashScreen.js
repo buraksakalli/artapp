@@ -5,6 +5,13 @@ import Header from '../Header';
 import ArtistPage from './ArtistPage';
 
 export default class SplashScreen extends Component {
+  componentDidMount() {
+    const { navigate } = this.props.navigation;
+    setTimeout(() => {
+      navigate('MainPage')
+    }, 2000);
+  }
+
   render() {
     const style = StyleSheet.create({
       container: {

@@ -4,8 +4,12 @@ import Header from '../Header';
 import { Fonts } from '../Fonts';
 
 export default class MainPage extends Component {
+  artistPressed = () => {
+    const { navigate } = this.props.navigation;
+    navigate('ArtistPage');
+  }
+
   render() {
-  
     const style = StyleSheet.create({
       container: {
         paddingLeft: 20,
@@ -57,17 +61,17 @@ export default class MainPage extends Component {
           <Text style={style.sectionTitle}>Artists</Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <View style={style.wrapper}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={this.artistPressed}>
                 <ImageBackground imageStyle={{ borderRadius: 10 }} style={style.image} source={require('../../assets/img/artists/rembrandt.jpg')}>
                   <Text style={style.artistName}>Rembrant Peale</Text>
                 </ImageBackground>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={this.artistPressed}>
                 <ImageBackground imageStyle={{ borderRadius: 10 }} style={style.image} source={require('../../assets/img/artists/van-gogh.jpg')}>
                   <Text style={style.artistName}>Van Gogh</Text>
                 </ImageBackground>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={this.artistPressed}>
                 <ImageBackground imageStyle={{ borderRadius: 10 }} style={style.image} source={require('../../assets/img/artists/davinci.jpg')}>
                   <Text style={style.artistName}>Da Vinci</Text>
                 </ImageBackground>
@@ -79,17 +83,17 @@ export default class MainPage extends Component {
           <Text style={style.sectionTitle}>Masterpieces</Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <View style={style.wrapper}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={this.artistPressed}>
                 <ImageBackground imageStyle={{ borderRadius: 10 }} style={style.image} source={require('../../assets/img/masterpieces/washington.jpg')}>
                   <Text style={style.artistName}>George Washington</Text>
                 </ImageBackground>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={this.artistPressed}>
                 <ImageBackground imageStyle={{ borderRadius: 10 }} style={style.image} source={require('../../assets/img/masterpieces/the-sisters.jpg')}>
                   <Text style={style.artistName}>The Sisters</Text>
                 </ImageBackground>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={this.artistPressed}>
                 <ImageBackground imageStyle={{ borderRadius: 10 }} style={style.image} source={require('../../assets/img/masterpieces/mona-lisa.jpeg')}>
                   <Text style={style.artistName}>Mona Lisa</Text>
                 </ImageBackground>
@@ -101,17 +105,17 @@ export default class MainPage extends Component {
           <Text style={style.sectionTitle}>Movements</Text>
           <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
             <View style={style.wrapper}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={this.artistPressed}>
                 <ImageBackground imageStyle={{ borderRadius: 10 }} style={style.image} source={require('../../assets/img/movements/the-persistence-of-memory.jpg')}>
-                  <Text style={style.masterpieceName}>Post-Impressionism</Text>
+                  <Text style={style.masterpieceName}>Post - Impressionism</Text>
                 </ImageBackground>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={this.artistPressed}>
                 <ImageBackground imageStyle={{ borderRadius: 10 }} style={style.image} source={require('../../assets/img/movements/the-scream.jpg')}>
                   <Text style={style.masterpieceName}>Expressionism</Text>
                 </ImageBackground>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={this.artistPressed}>
                 <ImageBackground imageStyle={{ borderRadius: 10 }} style={style.image} source={require('../../assets/img/movements/the-starry-night.jpg')}>
                   <Text style={style.masterpieceName}>Surrealism</Text>
                 </ImageBackground>
