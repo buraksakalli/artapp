@@ -2,24 +2,23 @@ import React, { Component } from 'react'
 import { Text, View, StyleSheet, ImageBackground, Dimensions, ScrollView } from 'react-native'
 import Header from '../Header';
 import { Fonts } from '../Fonts';
+import Screen from '../../src/utils/Screen';
 
 export default class ArtistPage extends Component {
   render() {
 
     // Getting screen dimensions
-    const Screen = {
-      height: Math.round(Dimensions.get("window").height),
-      width: Math.round(Dimensions.get("window").width)
-    }
+    const dimension = Screen.getDimension();
 
     const style = StyleSheet.create({
       container: {
-        width: Screen.width + 1,
-        height: Screen.height + 1
+        width: dimension.width,
+        height: dimension.height,
+        backgroundColor: '#F2EFE8'
       },
       bg: {
-        width: Screen.width + 1,
-        height: Screen.height + 1,
+        width: dimension.width,
+        height: dimension.height,
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'flex-end'
@@ -41,10 +40,10 @@ export default class ArtistPage extends Component {
       }
     });
     return (
-      <ScrollView>
+      <ScrollView showsVerticalScrollIndicator={false}>
         <View style={style.container}>
           <Header />
-          <ImageBackground style={style.bg} source={require('../../src/img/artists/rembrandt.jpg')}>
+          <ImageBackground style={style.bg} source={require('../../assets/img/artists/rembrandt.jpg')}>
             <View style={style.info}>
               <Text style={style.year}>1778-1860</Text>
               <Text style={style.name}>Rembrandt Peale</Text>
