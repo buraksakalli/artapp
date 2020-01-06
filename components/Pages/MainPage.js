@@ -8,7 +8,6 @@ export default class MainPage extends Component {
     const { navigate } = this.props.navigation;
     navigate('ArtistPage');
   }
-
   render() {
     const style = StyleSheet.create({
       container: {
