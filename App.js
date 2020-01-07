@@ -32,7 +32,7 @@ const cache = new InMemoryCache();
 const client = new ApolloClient({
   cache,
   link: new HttpLink({
-    uri: 'http://192.168.1.35:4001/graphql',
+    uri: 'http://47.254.152.38:4001/graphql',
     onError: ({ networkError, graphQLErrors }) => {
       console.log('graphQLErrors', graphQLErrors)
       console.log('networkError', networkError)
