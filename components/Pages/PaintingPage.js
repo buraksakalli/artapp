@@ -1,15 +1,35 @@
 import React, { Component } from 'react'
-import { Text, View, Image, StyleSheet, StatusBar, ScrollView, TouchableOpacity } from 'react-native'
+import { Text, View, Image, StyleSheet, StatusBar, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
 import Screen from '../../src/utils/Screen'
 import { Fonts } from '../Fonts';
 import Header from '../Header';
 import MenuIcon from '../MenuIcon';
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
+import { NavigationActions, withNavigation } from 'react-navigation';
 
-export default class PaintingPage extends Component {
+class PaintingPage extends Component {
 
-  paintingPressed = () => {
-    const { navigate } = this.props.navigation;
-    navigate('FullscreenImagePage')
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      paintingID: null
+    }
+  }
+
+  componentDidMount() {
+    const { navigation } = this.props;
+    this.setState({
+      paintingID: navigation.getParam('itemId', null)
+    })
+  }
+
+  paintingPressed = (pictureURL) => {
+    const { navigation } = this.props;
+    navigation.push('FullscreenImagePage', {
+      pictureURL: pictureURL
+    })
   }
 
   render() {
@@ -47,25 +67,46 @@ export default class PaintingPage extends Component {
     });
     return (
       <View>
-        <MenuIcon/>
+        <MenuIcon />
         <Header />
-        <TouchableOpacity onPress={this.paintingPressed}>
-          <Image style={style.image} source={require('../../assets/img/artists/rembrandt.jpg')} />
-        </TouchableOpacity>
-        <View style={style.header}>
-          <Text style={style.headerInfo}>1622</Text>
-          <Text style={style.paintingName}>The Starry Night</Text>
-          <Text style={style.headerInfo}>Van Gogh</Text>
-        </View>
-        <ScrollView>
-          <View style={style.content}>
-            <Text style={style.contentInfo}>Genre: religious painting</Text>
-            <Text style={style.contentInfo}>Location: National Gallery of Ancient Art, Rome, Italy</Text>
-            <Text style={style.contentInfo}>Style: Baroque</Text>
-            <Text style={style.contentInfo}>Dimensions: 91 x 81 cm</Text>
-          </View>
-        </ScrollView>
+        <Query pollInterval={500} query={gql`{painting(_id: "${this.state.paintingID}"){_id name date picture artist{name} genre location{country city museum} movement{name} dimensions{width height unit}}}`}>
+          {({ loading, error, data }) => {
+            if (loading) return (
+              <View style={style.activity}>
+                <ActivityIndicator size="large" color="#0000ff" />
+              </View>
+            );
+            if (error) return (
+              <View style={style.activity}>
+                <Text>`Error! ${error.message}`</Text>
+              </View>
+            );
+            const { painting } = data;
+            return (
+              <View>
+                <TouchableOpacity onPress={() => {this.paintingPressed(painting.picture)}}>
+                  <Image style={style.image} source={{ uri: painting.picture }} />
+                </TouchableOpacity>
+                <View style={style.header}>
+                  <Text style={style.headerInfo}>{new Date(parseInt(painting.date)).getFullYear()}</Text>
+                  <Text style={style.paintingName}>{painting.name}</Text>
+                  <Text style={style.headerInfo}>{painting.artist.name}</Text>
+                </View>
+                <ScrollView>
+                  <View style={style.content}>
+                    {painting.genre && <Text style={style.contentInfo}>Genre: {painting.genre}</Text>}
+                    {painting.genre && <Text style={style.contentInfo}>Location: {painting.location.museum}, {painting.location.city}, {painting.location.country}</Text>}
+                    {painting.movement.name && <Text style={style.contentInfo}>Style: {painting.movement.name}</Text>}
+                    {painting.dimensions && <Text style={style.contentInfo}>Dimensions: {painting.dimensions.width}x{painting.dimensions.height} {painting.dimensions.unit}</Text>}
+                  </View>
+                </ScrollView>
+              </View>
+            );
+          }}
+        </Query>
       </View>
     )
   }
 }
+
+export default withNavigation(PaintingPage)

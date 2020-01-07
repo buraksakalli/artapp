@@ -1,17 +1,40 @@
 import React, { Component } from 'react'
-import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
+import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native'
 import { withNavigation } from 'react-navigation';
 import Screen from '../src/utils/Screen';
 import { Fonts } from './Fonts';
+import gql from 'graphql-tag';
+import { Query } from 'react-apollo';
 
 class ArtistContent extends Component {
+  constructor(props) {
+    super(props)
 
-  paintingPressed = () => {
-    const { navigate } = this.props.navigation;
-    navigate('PaintingPage')
+    this.state = {
+      paintingCount: 0
+    }
+  }
+
+  paintingPressed = (id) => {
+    const { navigation } = this.props;
+    navigation.push('PaintingPage', {
+      itemId: id
+    })
+  }
+
+  setPaitingCount = (count) => {
+    this.setState({
+      paintingCount: count
+    })
   }
 
   render() {
+    const artist = this.props.artist;
+    const { paintingCount } = this.state;
+    var date = {
+      bornDate: new Date(parseInt(artist.born.date)).getFullYear(),
+      diedDate: new Date(parseInt(artist.died.date)).getFullYear()
+    }
     const dimension = Screen.getDimension();
     const imgWidth = Math.round(dimension.width * .3333);
     const imgHeight = Math.round(dimension.height * .2225);
@@ -57,44 +80,56 @@ class ArtistContent extends Component {
         width: imgWidth,
       },
       paintingsImage: {
-        width: imgWidth,
+        height: 160
       }
     });
 
     return (
       <View>
         <View style={style.content}>
-          <Text style={style.artistTitle}>Rembrandt PEALE</Text>
-          <Text style={style.artistTitle}>1733-1809</Text>
-          <Text style={style.artistDescription}>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</Text>
+          <Text style={style.artistTitle}>{artist.name}</Text>
+          <Text style={style.artistTitle}>{date.bornDate}-{date.diedDate}</Text>
+          <Text style={style.artistDescription}>{artist.description}</Text>
           <View style={style.paintingsTitle}>
             <Text>PAINTINGS GALLERY</Text>
-            <Text>IMAGES 24</Text>
+            <Text>IMAGES {paintingCount}</Text>
           </View>
         </View>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <View style={style.paintingsWrapper}>
-            <TouchableOpacity onPress={this.paintingPressed}>
-              <View style={style.paintings}>
-                <Image style={style.paintingsImage} source={require('../assets/img/movements/the-persistence-of-memory.jpg')}></Image>
-                <Text style={style.paintingDate}>1783-1801</Text>
-                <Text style={style.paintingName}>The Ponte Salarios</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.paintingPressed}>
-              <View style={style.paintings}>
-                <Image style={style.paintingsImage} source={require('../assets/img/movements/the-starry-night.jpg')}></Image>
-                <Text style={style.paintingDate}>1738-46</Text>
-                <Text style={style.paintingName}>Italian Mountainous Landscape</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={this.paintingPressed}>
-              <View style={style.paintings}>
-                <Image style={style.paintingsImage} source={require('../assets/img/movements/the-scream.jpg')}></Image>
-                <Text style={style.paintingDate}>1783-1801</Text>
-                <Text style={style.paintingName}>The Sisters</Text>
-              </View>
-            </TouchableOpacity>
+            <Query pollInterval={500} query={gql`{paintings(artistId:"${artist._id}"){_id name date picture}}`} onCompleted={data => this.setState({ paintingCount: data.paintings.length })}>
+              {({ loading, error, data }) => {
+                if (loading) return (
+                  <View style={style.activity}>
+                    <ActivityIndicator size="large" color="#0000ff" />
+                  </View>
+                );
+                if (error) return (
+                  <View style={style.activity}>
+                    <Text>`Error! ${error.message}`</Text>
+                  </View>
+                );
+
+                return (
+                  <FlatList
+                    horizontal={true}
+                    keyExtractor={data._id}
+                    data={data.paintings}
+                    renderItem={({ item }) => (
+                      <TouchableOpacity onPress={() => { this.paintingPressed(item._id) }}>
+                        <View style={style.paintings}>
+                          <Image style={style.paintingsImage} source={{ uri: item.picture }} />
+                          <Text style={style.paintingDate}>
+                            {new Date(parseInt(item.date)).getFullYear()}
+                          </Text>
+                          <Text style={style.paintingName}>{item.name}</Text>
+                        </View>
+                      </TouchableOpacity>
+                    )}
+                  />
+                );
+              }}
+            </Query>
           </View>
         </ScrollView>
       </View>
