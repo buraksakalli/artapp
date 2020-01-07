@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
 import { Fonts } from '../Fonts'
 import Header from '../Header';
-import ArtistPage from './ArtistPage';
 
 export default class SplashScreen extends Component {
   componentDidMount() {
     const { navigate } = this.props.navigation;
     setTimeout(() => {
       navigate('MainPage')
-    }, 2000);
+    }, 1000);
   }
 
   render() {

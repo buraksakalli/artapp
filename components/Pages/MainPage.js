@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native'
+import { Text, View, ScrollView, StyleSheet, ImageBackground, TouchableOpacity, BackHandler } from 'react-native'
 import Header from '../Header';
 import { Fonts } from '../Fonts';
+import { NavigationActions } from 'react-navigation';
 
 export default class MainPage extends Component {
   artistPressed = () => {
     const { navigate } = this.props.navigation;
     navigate('ArtistPage');
   }
+
   render() {
     const style = StyleSheet.create({
       container: {
