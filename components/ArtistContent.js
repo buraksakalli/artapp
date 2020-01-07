@@ -1,9 +1,16 @@
 import React, { Component } from 'react'
 import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
+import { withNavigation } from 'react-navigation';
 import Screen from '../src/utils/Screen';
 import { Fonts } from './Fonts';
 
-export default class ArtistContent extends Component {
+class ArtistContent extends Component {
+
+  paintingPressed = () => {
+    const { navigate } = this.props.navigation;
+    navigate('PaintingPage')
+  }
+
   render() {
     const dimension = Screen.getDimension();
     const imgWidth = Math.round(dimension.width * .3333);
@@ -31,10 +38,10 @@ export default class ArtistContent extends Component {
         marginTop: 30,
       },
       paintingsWrapper: {
-        marginTop: 20,
         fontFamily: Fonts.Ogg,
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        marginBottom: 30
       },
       paintingName: {
         fontSize: 14,
@@ -46,7 +53,11 @@ export default class ArtistContent extends Component {
         fontFamily: Fonts.Ogg
       },
       paintings: {
-        width: imgWidth
+        marginLeft: 30,
+        width: imgWidth,
+      },
+      paintingsImage: {
+        width: imgWidth,
       }
     });
 
@@ -61,26 +72,34 @@ export default class ArtistContent extends Component {
             <Text>IMAGES 24</Text>
           </View>
         </View>
-        <ScrollView style={{marginLeft: 30}} horizontal={true} showsHorizontalScrollIndicator={false}>
+        <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <View style={style.paintingsWrapper}>
-            <View style={style.paintings}>
-              <Image source={require('../assets/img/movements/the-persistence-of-memory.jpg')}></Image>
-              <Text style={style.paintingDate}>1783-1801</Text>
-              <Text style={style.paintingName}>The Ponte Salarios</Text>
-            </View>
-            <View style={style.paintings}>
-              <Image source={require('../assets/img/movements/the-scream.jpg')}></Image>
-              <Text style={style.paintingDate}>1738-46</Text>
-              <Text style={style.paintingName}>Italian Mountainous Landscape</Text>
-            </View>
-            <View style={style.paintings}>
-              <Image source={require('../assets/img/movements/the-starry-night.jpg')}></Image>
-              <Text style={style.paintingDate}>1783-1801</Text>
-              <Text style={style.paintingName}>The Sisters</Text>
-            </View>
+            <TouchableOpacity onPress={this.paintingPressed}>
+              <View style={style.paintings}>
+                <Image style={style.paintingsImage} source={require('../assets/img/movements/the-persistence-of-memory.jpg')}></Image>
+                <Text style={style.paintingDate}>1783-1801</Text>
+                <Text style={style.paintingName}>The Ponte Salarios</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.paintingPressed}>
+              <View style={style.paintings}>
+                <Image style={style.paintingsImage} source={require('../assets/img/movements/the-starry-night.jpg')}></Image>
+                <Text style={style.paintingDate}>1738-46</Text>
+                <Text style={style.paintingName}>Italian Mountainous Landscape</Text>
+              </View>
+            </TouchableOpacity>
+            <TouchableOpacity onPress={this.paintingPressed}>
+              <View style={style.paintings}>
+                <Image style={style.paintingsImage} source={require('../assets/img/movements/the-scream.jpg')}></Image>
+                <Text style={style.paintingDate}>1783-1801</Text>
+                <Text style={style.paintingName}>The Sisters</Text>
+              </View>
+            </TouchableOpacity>
           </View>
         </ScrollView>
       </View>
     )
   }
 }
+
+export default withNavigation(ArtistContent)

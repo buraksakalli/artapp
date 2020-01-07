@@ -1,5 +1,6 @@
 export const Fonts = {
   "Ogg": "Ogg-Roman",
   "OggItalic": "Ogg-Italic",
-  "Maison": "Maison-Book"
+  "Maison": "MaisonNeue-Book",
+  "MaisonLight": "MaisonNeue-Light"
 }

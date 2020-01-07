@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, ImageBackground, ScrollView, Image } from 'react-native'
+import { Text, View, StyleSheet, ImageBackground, ScrollView, TouchableOpacity } from 'react-native'
 import Header from '../Header';
 import { Fonts } from '../Fonts';
 import Screen from '../../src/utils/Screen';
 import Content from '../ArtistContent';
+import MenuIcon from '../MenuIcon';
 
 export default class ArtistPage extends Component {
   constructor(props) {
@@ -54,22 +55,23 @@ export default class ArtistPage extends Component {
         fontSize: 45,
         color: '#EEEEEE',
       },
-
     });
     return (
-      <ScrollView showsVerticalScrollIndicator={false} onScroll={this.scroll}>
-        <View style={style.container}>
-          <Header />
-          <ImageBackground style={style.bg} source={require('../../assets/img/artists/rembrandt.jpg')}>
-            <View style={style.info}>
-              <Text style={style.year}>1778-1860</Text>
-              <Text style={style.name}>Rembrandt Peale</Text>
-            </View>
-
-          </ImageBackground>
-        </View>
-        <Content />
-      </ScrollView>
+      <View>
+        <MenuIcon />
+        <ScrollView showsVerticalScrollIndicator={false} onScroll={this.scroll}>
+          <View style={style.container}>
+            <Header />
+            <ImageBackground style={style.bg} source={require('../../assets/img/artists/rembrandt.jpg')}>
+              <View style={style.info}>
+                <TouchableOpacity onPress={this.paintingPressed}><Text style={style.year}>1778-1860</Text></TouchableOpacity>
+                <Text style={style.name}>Rembrandt Peale</Text>
+              </View>
+            </ImageBackground>
+          </View>
+          <Content />
+        </ScrollView>
+      </View>
     )
   }
 }
