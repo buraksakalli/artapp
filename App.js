@@ -4,6 +4,7 @@ import { createStackNavigator } from 'react-navigation-stack';
 import SplashScreen from './src/components/Pages/SplashScreen';
 import ArtistPage from './src/components/Pages/ArtistPage';
 import MainPage from './src/components/Pages/MainPage';
+import MovementPage from './src/components/Pages/MovementPage';
 import PaintingPage from './src/components/Pages/PaintingPage';
 import FullscreenImage from './src/components/Pages/FullscreenImagePage';
 import Menu from './src/components/Menu';
@@ -17,6 +18,7 @@ const AppNavigator = createStackNavigator(
     Home: SplashScreen,
     ArtistPage: ArtistPage,
     MainPage: MainPage,
+    MovementPage: MovementPage,
     PaintingPage: PaintingPage,
     FullscreenImagePage: FullscreenImage,
     Menu: Menu

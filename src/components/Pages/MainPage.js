@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import { Text, View, ScrollView, StyleSheet, ImageBackground, TouchableOpacity, BackHandler, FlatList, ActivityIndicator } from 'react-native'
 import Header from '../Header';
 import { Fonts } from '../../utils/Fonts';
-import { NavigationActions } from 'react-navigation';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 
@@ -17,6 +16,13 @@ export default class MainPage extends Component {
   paintingPressed = (id) => {
     const { navigation } = this.props;
     navigation.push('PaintingPage', {
+      itemId: id
+    })
+  }
+
+  movementPressed = (id) => {
+    const { navigation } = this.props;
+    navigation.push('MovementPage', {
       itemId: id
     })
   }
@@ -160,7 +166,7 @@ export default class MainPage extends Component {
                       keyExtractor={data._id}
                       data={data.movements}
                       renderItem={({ item }) => (
-                        <TouchableOpacity onPress={this.artistPressed}>
+                        <TouchableOpacity onPress={() => { this.movementPressed(item._id) }}>
                           <ImageBackground imageStyle={{ borderRadius: 10 }} style={style.image} source={{ uri: item.picture }}>
                             <Text style={style.artistName}>{item.name}</Text>
                           </ImageBackground>
