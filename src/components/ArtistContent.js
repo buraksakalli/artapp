@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native'
 import { withNavigation } from 'react-navigation';
-import Screen from '../src/utils/Screen';
-import { Fonts } from './Fonts';
+import Screen from '../utils/Screen';
+import { Fonts } from '../utils/Fonts';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 

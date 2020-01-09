@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { Text, View, Image, StyleSheet, StatusBar, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
-import Screen from '../../src/utils/Screen'
-import { Fonts } from '../Fonts';
+import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
+import Screen from '../../utils/Screen'
+import { Fonts } from '../../utils/Fonts';
 import Header from '../Header';
 import MenuIcon from '../MenuIcon';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import { NavigationActions, withNavigation } from 'react-navigation';
+import { withNavigation } from 'react-navigation';
 
 class PaintingPage extends Component {
 

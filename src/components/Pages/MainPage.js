@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, StyleSheet, ImageBackground, TouchableOpacity, BackHandler, FlatList, ActivityIndicator } from 'react-native'
 import Header from '../Header';
-import { Fonts } from '../Fonts';
+import { Fonts } from '../../utils/Fonts';
 import { NavigationActions } from 'react-navigation';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';

@@ -1,12 +1,12 @@
 import React from 'react';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import SplashScreen from './components/Pages/SplashScreen';
-import ArtistPage from './components/Pages/ArtistPage';
-import MainPage from './components/Pages/MainPage';
-import PaintingPage from './components/Pages/PaintingPage';
-import FullscreenImage from './components/Pages/FullscreenImagePage';
-import Menu from './components/Menu';
+import SplashScreen from './src/components/Pages/SplashScreen';
+import ArtistPage from './src/components/Pages/ArtistPage';
+import MainPage from './src/components/Pages/MainPage';
+import PaintingPage from './src/components/Pages/PaintingPage';
+import FullscreenImage from './src/components/Pages/FullscreenImagePage';
+import Menu from './src/components/Menu';
 import { ApolloClient } from 'apollo-client';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import { HttpLink } from 'apollo-link-http';

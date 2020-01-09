@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { Text, View, Image, StyleSheet, StatusBar, TouchableOpacity, Share } from 'react-native'
-import Screen from '../../src/utils/Screen'
-import { NavigationActions } from 'react-navigation';
+import { View, Image, StyleSheet, StatusBar, TouchableOpacity, Share } from 'react-native'
+import Screen from '../../utils/Screen';
 
 export default class FullscreenImagePage extends Component {
   constructor(props) {

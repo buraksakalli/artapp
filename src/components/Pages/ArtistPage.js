@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, ImageBackground, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
 import Header from '../Header';
-import { Fonts } from '../Fonts';
-import Screen from '../../src/utils/Screen';
+import { Fonts } from '../../utils/Fonts';
+import Screen from '../../utils/Screen';
 import Content from '../ArtistContent';
 import MenuIcon from '../MenuIcon';
 import gql from 'graphql-tag';
