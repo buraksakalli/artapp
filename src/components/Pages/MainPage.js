@@ -98,7 +98,7 @@ export default class MainPage extends Component {
                       data={data.artists}
                       renderItem={({ item }) => (
                         <TouchableOpacity onPress={() => { this.artistPressed(item._id) }}>
-                          <ImageBackground imageStyle={{ borderRadius: 10 }} style={style.image} source={{ uri: item.picture }}>
+                          <ImageBackground style={style.image} source={{ uri: item.picture }}>
                             <Text style={style.artistName}>{item.name}</Text>
                           </ImageBackground>
                         </TouchableOpacity>
@@ -132,7 +132,7 @@ export default class MainPage extends Component {
                       data={data.paintings}
                       renderItem={({ item }) => (
                         <TouchableOpacity onPress={() => { this.paintingPressed(item._id) }}>
-                          <ImageBackground imageStyle={{ borderRadius: 10 }} style={style.image} source={{ uri: item.picture }}>
+                          <ImageBackground style={style.image} source={{ uri: item.picture }}>
                             <Text style={style.artistName}>{item.name}</Text>
                           </ImageBackground>
                         </TouchableOpacity>
@@ -167,7 +167,7 @@ export default class MainPage extends Component {
                       data={data.movements}
                       renderItem={({ item }) => (
                         <TouchableOpacity onPress={() => { this.movementPressed(item._id) }}>
-                          <ImageBackground imageStyle={{ borderRadius: 10 }} style={style.image} source={{ uri: item.picture }}>
+                          <ImageBackground style={style.image} source={{ uri: item.picture }}>
                             <Text style={style.artistName}>{item.name}</Text>
                           </ImageBackground>
                         </TouchableOpacity>

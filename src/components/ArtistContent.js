@@ -109,7 +109,7 @@ class ArtistContent extends Component {
                     <Text>`Error! ${error.message}`</Text>
                   </View>
                 );
-
+                  console.log(data)
                 return (
                   <FlatList
                     horizontal={true}
