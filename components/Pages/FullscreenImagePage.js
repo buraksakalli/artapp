@@ -23,7 +23,7 @@ export default class FullscreenImagePage extends Component {
     try {
       const result = await Share.share({
         message:
-          'React Native | A framework for building native apps using React',
+          '',
       });
 
       if (result.action === Share.sharedAction) {

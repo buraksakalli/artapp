@@ -121,7 +121,7 @@ export default class MainPage extends Component {
                     </View>
                   );
                   return (
-                    <FlatList
+                    <FlatList horizontal={true}
                       keyExtractor={data._id}
                       data={data.paintings}
                       renderItem={({ item }) => (
