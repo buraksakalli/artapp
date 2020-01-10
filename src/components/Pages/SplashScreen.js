@@ -5,9 +5,9 @@ import Header from '../Header';
 
 export default class SplashScreen extends Component {
   componentDidMount() {
-    const { navigate } = this.props.navigation;
+    const { navigation } = this.props;
     setTimeout(() => {
-      navigate('MainPage')
+      navigation.replace('MainPage');
     }, 1000);
   }
 
