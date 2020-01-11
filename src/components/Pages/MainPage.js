@@ -5,7 +5,7 @@ import Title from '../atoms/title';
 import Block from '../organisms/Block';
 import { getAllArtists, getAllMovements, getAllPaintings } from '../../utils/Queries';
 
-export default class MainPage extends Component {
+class MainPage extends Component {
 
   constructor(props) {
     super(props)
@@ -36,16 +36,6 @@ export default class MainPage extends Component {
   }
 
   render() {
-    const style = StyleSheet.create({
-      container: {
-        paddingLeft: 20,
-        paddingTop: 20,
-        backgroundColor: "#F2EFE8"
-      },
-      section: {
-        marginBottom: 30,
-      }
-    })
     return (
       <ScrollView style={style.container}>
         <Header />
@@ -65,3 +55,16 @@ export default class MainPage extends Component {
     )
   }
 }
+
+const style = StyleSheet.create({
+  container: {
+    paddingLeft: 20,
+    paddingTop: 20,
+    backgroundColor: "#F2EFE8"
+  },
+  section: {
+    marginBottom: 30,
+  }
+})
+
+export default MainPage;

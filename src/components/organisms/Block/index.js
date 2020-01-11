@@ -37,7 +37,7 @@ export class Block extends Component {
     const { onCompleted, query, onPress } = this.props;
     return (
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
-        <View style={style.wrapper}>
+        <View style={style.container}>
           <Query pollInterval={500} query={query.query} onCompleted={onCompleted}>
             {({ loading, error, data }) => {
               if (loading) return null;
@@ -62,15 +62,10 @@ export class Block extends Component {
 }
 
 const style = StyleSheet.create({
-  container: {
-    paddingLeft: 20,
-    paddingTop: 20,
-    backgroundColor: "#F2EFE8"
-  },
   section: {
     marginBottom: 30,
   },
-  wrapper: {
+  container: {
     display: 'flex',
     flexDirection: 'row',
   }
