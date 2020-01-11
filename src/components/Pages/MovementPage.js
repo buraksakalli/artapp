@@ -40,7 +40,7 @@ export default class MovementPage extends Component {
       space: Math.round(dimension.width * ((100 * 20 / 360)) / 100),
       lineHeight: Math.round(dimension.width * ((100 * 30 / 360)) / 100),
       picWidth: Math.round(dimension.width * ((100 * 300 / 360) / 100)),
-      picHeight: Math.round(dimension.width * ((100 * 100 / 851) / 100)),
+      picHeight: Math.round(dimension.width * ((100 * 200 / 851) / 100)),
     }
 
     const style = StyleSheet.create({
@@ -146,7 +146,7 @@ export default class MovementPage extends Component {
                         );
                         return (
                           <View style={style.picture}>
-                            <ImageBackground style={{width: "100%", height: "100%"}} resizeMode="center" source={{ uri: data.paintings[Math.floor(Math.random() * data.paintings.length)].picture }} />
+                            <ImageBackground style={{width: "100%", height: "100%"}} source={{ uri: data.paintings[Math.floor(Math.random() * data.paintings.length)].picture }} />
                           </View>
                         );
                       }}

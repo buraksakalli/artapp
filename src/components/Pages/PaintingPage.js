@@ -83,28 +83,31 @@ class PaintingPage extends Component {
             );
             const { painting } = data;
             return (
-              <View>
-                <TouchableOpacity onPress={() => {this.paintingPressed(painting.picture)}}>
-                  <Image style={style.image} source={{ uri: painting.picture }} />
-                </TouchableOpacity>
-                <View style={style.header}>
-                  <Text style={style.headerInfo}>{new Date(parseInt(painting.date)).getFullYear()}</Text>
-                  <Text style={style.paintingName}>{painting.name}</Text>
-                  <Text style={style.headerInfo}>{painting.artist.name}</Text>
-                </View>
-                <ScrollView>
+              <ScrollView>
+                <View>
+                  <TouchableOpacity onPress={() => { this.paintingPressed(painting.picture) }}>
+                    <Image style={style.image} source={{ uri: painting.picture }} />
+                  </TouchableOpacity>
+
+                  <View style={style.header}>
+                    <Text style={style.headerInfo}>{new Date(parseInt(painting.date)).getFullYear()}</Text>
+                    <Text style={style.paintingName}>{painting.name}</Text>
+                    <Text style={style.headerInfo}>{painting.artist.name}</Text>
+                  </View>
+
                   <View style={style.content}>
                     {painting.genre && <Text style={style.contentInfo}>Genre: {painting.genre}</Text>}
                     {painting.genre && <Text style={style.contentInfo}>Location: {painting.location.museum}, {painting.location.city}, {painting.location.country}</Text>}
                     {painting.movement.name && <Text style={style.contentInfo}>Style: {painting.movement.name}</Text>}
                     {painting.dimensions && <Text style={style.contentInfo}>Dimensions: {painting.dimensions.width}x{painting.dimensions.height} {painting.dimensions.unit}</Text>}
                   </View>
-                </ScrollView>
-              </View>
+                </View>
+              </ScrollView>
             );
           }}
         </Query>
-      </View>
+      </View >
+
     )
   }
 }
