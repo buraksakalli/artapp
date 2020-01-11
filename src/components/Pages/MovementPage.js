@@ -5,7 +5,6 @@ import { Fonts } from '../../utils/Fonts';
 import MenuIcon from '../MenuIcon';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import { withNavigation } from 'react-navigation';
 import Screen from '../../utils/Screen';
 
 export default class MovementPage extends Component {

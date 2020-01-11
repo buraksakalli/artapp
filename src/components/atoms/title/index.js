@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet } from 'react-native'
-import { Fonts } from '../../../utils/Fonts';
+import { Text } from 'react-native'
+import styles from './style';
 
 class Title extends Component {
   render() {
@@ -11,30 +11,5 @@ class Title extends Component {
     )
   }
 }
-
-const styles = StyleSheet.create({
-  default: {
-    fontSize: 20,
-    fontFamily: Fonts.Ogg,
-    marginBottom: 10,
-  },
-  section: {
-    fontSize: 36,
-    fontFamily: Fonts.Ogg,
-    marginBottom: 10,
-  },
-  error: {
-
-  },
-  artistName: {
-    color: 'white',
-    fontFamily: Fonts.Ogg,
-    fontSize: 18,
-    marginLeft: 10,
-    marginRight: 10,
-    marginBottom: 10,
-    flexWrap: 'wrap',
-  },
-});
 
 export default Title

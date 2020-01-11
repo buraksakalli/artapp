@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { FlatList, View, ScrollView, StyleSheet } from 'react-native'
+import { FlatList, View, ScrollView } from 'react-native'
 import { Query } from 'react-apollo';
 import BlockCard from '../../molecules/cards/BlockCard';
 import { withNavigation } from 'react-navigation';
+import style from './style';
 
 export class Block extends Component {
   render() {
@@ -29,12 +30,12 @@ export class Block extends Component {
     }
 
     itemPressed = (item, id) => {
-      if (item == "artists") artistPressed(id);
-      if (item == "paintings") paintingPressed(id);
-      if (item == "movements") movementPressed(id);
+      item == "artists" && artistPressed(id);
+      item == "paintings" && paintingPressed(id);
+      item == "movements" && movementPressed(id);
     }
 
-    const { onCompleted, query, onPress } = this.props;
+    const { onCompleted, query } = this.props;
     return (
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         <View style={style.container}>
@@ -60,15 +61,5 @@ export class Block extends Component {
     )
   }
 }
-
-const style = StyleSheet.create({
-  section: {
-    marginBottom: 30,
-  },
-  container: {
-    display: 'flex',
-    flexDirection: 'row',
-  }
-})
 
 export default withNavigation(Block)

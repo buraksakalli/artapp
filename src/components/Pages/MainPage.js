@@ -51,7 +51,7 @@ class MainPage extends Component {
           <Title variant="section">Movements</Title>
           <Block query={getAllMovements} onCompleted={this.onCompleted.bind(this, 'movement')} />
         </View>
-      </ScrollView >
+      </ScrollView>
     )
   }
 }
