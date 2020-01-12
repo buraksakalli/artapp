@@ -26,5 +26,8 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 
 Please make sure to update tests as appropriate.
 
+## Backend
+You can also check [backend repository](https://github.com/buraksakalli/artapp-graphql)
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
