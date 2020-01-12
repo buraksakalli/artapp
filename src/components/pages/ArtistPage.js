@@ -17,7 +17,6 @@ export default class ArtistPage extends Component {
     }
   }
 
-
   componentDidMount() {
     const { navigation } = this.props;
     this.setState({
