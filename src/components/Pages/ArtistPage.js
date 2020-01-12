@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, ImageBackground, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
-import Header from '../Header';
-import { Fonts } from '../../utils/Fonts';
-import Screen from '../../utils/Screen';
-import Content from '../ArtistContent';
-import MenuIcon from '../MenuIcon';
+import Header from 'components/atoms/header';
+import { Fonts } from 'utils/Fonts';
+import Screen from 'utils/Screen';
+import Content from 'components/ArtistContent';
+import MenuIcon from 'components/molecules/menuIcon';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 
@@ -93,7 +93,7 @@ export default class ArtistPage extends Component {
                       <Text style={style.name}>{artist.name}</Text>
                     </View>
                   </ImageBackground>
-                  <Content artist={artist}/>
+                  <Content artist={artist} />
                 </ScrollView>
               );
             }}

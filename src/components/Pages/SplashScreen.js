@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet } from 'react-native'
-import { Fonts } from '../../utils/Fonts'
-import Header from '../Header';
+import { Fonts } from 'utils/Fonts'
+import Header from 'components/atoms/header';
 
 export default class SplashScreen extends Component {
   componentDidMount() {

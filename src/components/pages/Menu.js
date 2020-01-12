@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
-import { Fonts } from '../utils/Fonts';
-import Screen from '../utils/Screen';
-import Header from './Header';
+import { Fonts } from 'utils/Fonts';
+import Screen from 'utils/Screen';
+import Header from 'components/atoms/header';
 
 export default class Menu extends Component {
   constructor(props) {

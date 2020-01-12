@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StatusBar, View } from 'react-native'
+import { StatusBar } from 'react-native'
 
 export default class Header extends Component {
   render() {

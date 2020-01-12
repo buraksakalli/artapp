@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { Text, View, StyleSheet, ScrollView, TouchableOpacity, ImageBackground, ActivityIndicator, FlatList, Image } from 'react-native'
-import Header from '../Header';
-import { Fonts } from '../../utils/Fonts';
-import MenuIcon from '../MenuIcon';
+import Header from 'components/atoms/header';
+import { Fonts } from 'utils/Fonts';
+import MenuIcon from 'components/molecules/menuIcon';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
-import Screen from '../../utils/Screen';
+import Screen from 'utils/Screen';
 
 export default class MovementPage extends Component {
   constructor(props) {

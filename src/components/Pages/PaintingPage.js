@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
-import Screen from '../../utils/Screen'
-import { Fonts } from '../../utils/Fonts';
-import Header from '../Header';
-import MenuIcon from '../MenuIcon';
+import Screen from 'utils/Screen'
+import { Fonts } from 'utils/Fonts';
+import Header from 'components/atoms/header';
+import MenuIcon from 'components/molecules/menuIcon';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { withNavigation } from 'react-navigation';

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { View, ScrollView, StyleSheet } from 'react-native'
-import Header from '../Header';
-import Title from '../atoms/title';
-import Block from '../organisms/Block';
+import Header from 'components/atoms/header';
+import Title from 'components/atoms/title';
+import Block from 'components/organisms/Block';
 import { getAllArtists, getAllMovements, getAllPaintings } from '../../utils/Queries';
 
 class MainPage extends Component {
