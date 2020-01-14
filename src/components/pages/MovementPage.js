@@ -6,6 +6,7 @@ import MenuIcon from 'components/molecules/menuIcon';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import Screen from 'utils/Screen';
+import MovementPicture from 'components/atoms/MovementPicture';
 
 export default class MovementPage extends Component {
   constructor(props) {
@@ -129,27 +130,7 @@ export default class MovementPage extends Component {
                   <View style={style.header}>
                     <Text style={style.title}>{movement.name}</Text>
                     <Text style={style.subtitle}>Art Movement</Text>
-                    <Query pollInterval={500} query={gql`{paintings(movementId: "${this.state.movementID}"){ picture }}`}>
-                      {({ loading, error, data }) => {
-                        if (loading) {
-                          return (
-                            <View style={style.activity}>
-                              <ActivityIndicator size="large" color="#0000ff" />
-                            </View>
-                          )
-                        }
-                        if (error) return (
-                          <View style={style.activity}>
-                            <Text>`Error! ${error.message}`</Text>
-                          </View>
-                        );
-                        return (
-                          <View style={style.picture}>
-                            <ImageBackground style={{width: "100%", height: "100%"}} source={{ uri: data.paintings[Math.floor(Math.random() * data.paintings.length)].picture }} />
-                          </View>
-                        );
-                      }}
-                    </Query>
+                    <MovementPicture movementId={this.state.movementID} />
                   </View>
                   <Text style={style.sectionDescription}>{movement.description}</Text>
                   <Text style={style.artistCounter}>{this.state.artistCounter} ARTISTS</Text>
