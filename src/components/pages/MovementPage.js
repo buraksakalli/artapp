@@ -7,6 +7,10 @@ import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import Screen from 'utils/Screen';
 import MovementPicture from 'components/atoms/MovementPicture';
+import PageTitles from 'components/molecules/PageTitles';
+import {Text as ArticleText} from 'components/atoms/Text';
+import { ContentCard } from 'components/molecules/cards/ContentCard';
+
 
 export default class MovementPage extends Component {
   constructor(props) {
@@ -50,23 +54,12 @@ export default class MovementPage extends Component {
         paddingRight: 30,
         backgroundColor: "#F2EFE8"
       },
-      title: {
-        fontSize: 38,
-        fontFamily: Fonts.Ogg,
-        textAlign: 'center'
-      },
       image: {
         marginBottom: 10,
         display: 'flex',
         height: Dimensions.height,
         width: Dimensions.width,
         resizeMode: 'cover' // it's not necessary
-      },
-      subtitle: {
-        textAlign: 'center',
-        fontFamily: Fonts.Ogg,
-        fontSize: 24,
-        marginBottom: 20
       },
       header: {
         display: 'flex', flexDirection: 'column', justifyContent: 'center', marginBottom: 20
@@ -114,25 +107,17 @@ export default class MovementPage extends Component {
         <ScrollView style={style.container}>
           <Query pollInterval={500} query={gql`{movement(_id: "${this.state.movementID}"){ name description }}`}>
             {({ loading, error, data }) => {
-              if (loading) return (
-                <View style={style.activity}>
-                  <ActivityIndicator size="large" color="#0000ff" />
-                </View>
-              );
-              if (error) return (
-                <View style={style.activity}>
-                  <Text>`Error! ${error.message}`</Text>
-                </View>
-              );
+              if (loading || error) {
+                return null;
+              }
               const { movement } = data;
               return (
                 <View>
                   <View style={style.header}>
-                    <Text style={style.title}>{movement.name}</Text>
-                    <Text style={style.subtitle}>Art Movement</Text>
+                    <PageTitles title={movement.name} subtitle="Art Movement"/>
                     <MovementPicture movementId={this.state.movementID} />
                   </View>
-                  <Text style={style.sectionDescription}>{movement.description}</Text>
+                  <ArticleText variant="article">{movement.description}</ArticleText>
                   <Text style={style.artistCounter}>{this.state.artistCounter} ARTISTS</Text>
                 </View>
               );
@@ -140,36 +125,29 @@ export default class MovementPage extends Component {
           </Query>
           <View style={style.section}>
             <View style={style.wrapper}>
-              <Query pollInterval={500} query={gql`{artists(movementId: "${this.state.movementID}"){_id name picture born{date} died{date} description }}`} onCompleted={data => this.setState({ artistCounter: data.artists.length })}>
-                {({ loading, error, data }) => {
-                  if (loading) return (
-                    <View style={style.activity}>
-                      <ActivityIndicator size="large" color="#0000ff" />
-                    </View>
-                  );
-                  if (error) return (
-                    <View style={style.activity}>
-                      <Text>`Error! ${error.message}`</Text>
-                    </View>
-                  );
-
-                  return (
-                    <FlatList
-                      horizontal={true}
-                      keyExtractor={data._id}
-                      data={data.artists}
-                      renderItem={({ item }) => (
-                        <TouchableOpacity style={style.artist} onPress={() => { this.artistPressed(item._id) }}>
-                          <ImageBackground style={style.image} source={{ uri: item.picture }} />
-                          <Text style={style.artistDate}>{new Date(parseInt(item.born.date)).getFullYear()} - {new Date(parseInt(item.died.date)).getFullYear()}</Text>
-                          <Text style={style.artistName}>{item.name}</Text>
-                        </TouchableOpacity>
-                      )}
-                    />
-                  );
-                }}
+              <Query
+                pollInterval={500}
+                query={gql`{artists(movementId: "${this.state.movementID}"){_id name picture born{date} died{date} description }}`}
+                onCompleted={data => this.setState({ artistCounter: data.artists.length })}>
+                  {({ loading, error, data }) => {
+                    if (loading || error) {
+                      return null;
+                    }
+                    return (
+                      data.artists.map(artist => {
+                        const bornDate = new Date(parseInt(artist.born.date)).getFullYear()
+                        const diedDate = new Date(parseInt(artist.died.date)).getFullYear()
+                        const date = `${bornDate} - ${diedDate}`;
+                        return <ContentCard
+                          date={date}
+                          title={artist.name}
+                          pictureUrl={artist.picture}
+                          onPress={() => {this.artistPressed(artist._id)}}
+                        />
+                      })
+                    );
+                  }}
               </Query>
-
             </View>
           </View>
         </ScrollView>

@@ -23,5 +23,10 @@ export default StyleSheet.create({
     marginRight: 10,
     marginBottom: 10,
     flexWrap: 'wrap',
+  },
+  artMovement: {
+    fontFamily: Fonts.Ogg,
+    fontSize: 24,
+    marginBottom: 20
   }
 });

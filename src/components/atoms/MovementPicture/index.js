@@ -20,12 +20,12 @@ export class MovementPicture extends Component {
           }
           if (error) return (
             <View style={styles.activity}>
-              <Text>`Error! ${error.message}`</Text>
+              <Text>{`Error! ${error.message}`}</Text>
             </View>
           );
           return (
             <View style={styles.picture}>
-              <ImageBackground style={{width: "100%", height: "100%"}} source={{ uri: data.paintings[Math.floor(Math.random() * data.paintings.length)].picture }} />
+              <ImageBackground style={styles.picture} source={{ uri: data.paintings[Math.floor(Math.random() * data.paintings.length)].picture }} />
             </View>
           );
         }}
