@@ -22,22 +22,26 @@ class Menu extends Component {
       query = getAllArtists;
     }
 
-    if (target == "Masterpieces") {
+    else if (target == "Masterpieces") {
       targetPage = "PaintingPage";
       query = getAllPaintings;
     }
-    if (target == "Movements") {
+    else if (target == "Movements") {
       targetPage = "MovementPage";
       query = getAllMovements;
     }
-    navigation.push("General", {
-      targetPage: targetPage,
-      query: query,
-      title: target
-    })
+    if (query != null) {
+      navigation.push("General", {
+        targetPage: targetPage,
+        query: query,
+        title: target
+      })
+    } else {
+      navigation.push(target)
+    }
   }
 
-  closeButtonPressed = (target) => {
+  closeButtonPressed = () => {
     const { navigation } = this.props;
     navigation.goBack();
   }
