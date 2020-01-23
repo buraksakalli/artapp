@@ -6,6 +6,9 @@ import ArtistPage from 'components/pages/ArtistPage';
 import MainPage from 'components/pages/MainPage';
 import MovementPage from 'components/pages/MovementPage';
 import PaintingPage from 'components/pages/PaintingPage';
+import Artists from 'components/pages/Artists/index';
+import Masterpieces from 'components/pages/Masterpieces/index';
+import Movements from 'components/pages/Movements/index';
 import FullscreenImage from 'components/pages/FullscreenImagePage';
 import Menu from 'components/pages/Menu';
 import { ApolloClient } from 'apollo-client';
@@ -21,7 +24,10 @@ const AppNavigator = createStackNavigator(
     MovementPage: MovementPage,
     PaintingPage: PaintingPage,
     FullscreenImagePage: FullscreenImage,
-    Menu: Menu
+    Menu: Menu,
+    Artists: Artists,
+    Masterpieces: Masterpieces,
+    Movements: Movements
   },
   {
     initialRouteName: "Home",

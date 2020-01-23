@@ -4,22 +4,30 @@ export const getAllPaintings = gql`{
   paintings {
     _id 
     name 
-    picture 
+    picture
+    date
   }
 }`
 export const getAllMovements = gql`{
   movements {
     _id 
     name 
-    picture 
+    picture
   }
 }`
+
 export const getAllArtists = gql`{
   artists 
   {
     _id 
     name 
-    picture 
+    picture
+    born {
+      date
+    }
+    died {
+      date
+    }
   }
 }`
 

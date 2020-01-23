@@ -4,11 +4,13 @@ import { Fonts } from 'utils/Fonts';
 
 export class ContentCard extends Component {
   render() {
-    const {date, title, pictureUrl, onPress} = this.props;
+    const { date, title, pictureUrl, onPress } = this.props;
     return (
       <TouchableOpacity style={style.container} onPress={onPress}>
         <ImageBackground style={style.image} source={{ uri: pictureUrl }} />
-        <Text style={style.artistDate}>{date}</Text>
+        {
+          date && <Text style={style.artistDate}>{date}</Text>
+        }
         <Text style={style.artistName}>{title}</Text>
       </TouchableOpacity>
     )

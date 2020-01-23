@@ -3,7 +3,6 @@ import { Text, View, StyleSheet, ScrollView } from 'react-native'
 import Header from 'components/atoms/header';
 import { Fonts } from 'utils/Fonts';
 import MenuIcon from 'components/molecules/menuIcon';
-import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import Screen from 'utils/Screen';
 import MovementPicture from 'containers/MovementPicture';
@@ -13,8 +12,6 @@ import MovementPageBlock from 'containers/MovementPageBlock';
 import Loading from 'components/atoms/loading';
 import Error from 'components/atoms/error';
 import {getMovement} from 'utils/Queries';
-
-
 
 export default class MovementPage extends Component {
   constructor(props) {

@@ -57,9 +57,9 @@ export default class Menu extends Component {
         </TouchableOpacity>
         <View style={style.menu}>
           <TouchableOpacity onPress={() => { this.menuItemPressed('MainPage') }}><Text style={style.menuItem}>Home</Text></TouchableOpacity>
-          <TouchableOpacity onPress={() => { this.menuItemPressed('ArtistPage') }}><Text style={style.menuItem}>Artists</Text></TouchableOpacity>
-          <TouchableOpacity><Text style={style.menuItem}>Masterpieces</Text></TouchableOpacity>
-          <TouchableOpacity onPress={() => { this.menuItemPressed('MovementPage') }}><Text style={style.menuItem}>Art Movements</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => { this.menuItemPressed('Artists') }}><Text style={style.menuItem}>Artists</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => { this.menuItemPressed('Masterpieces') }}><Text style={style.menuItem}>Masterpieces</Text></TouchableOpacity>
+          <TouchableOpacity onPress={() => { this.menuItemPressed('Movements') }}><Text style={style.menuItem}>Art Movements</Text></TouchableOpacity>
           <TouchableOpacity><Text style={style.menuItem}>Contact</Text></TouchableOpacity>
         </View>
       </View>

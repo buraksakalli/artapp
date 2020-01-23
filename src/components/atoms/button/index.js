@@ -3,9 +3,9 @@ import { TouchableOpacity } from 'react-native'
 
 class Button extends Component {
   render() {
-    const { style, children } = this.props;
+    const { style, children, onPress } = this.props;
     return (
-      <TouchableOpacity style={style}>
+      <TouchableOpacity style={style} onPress={onPress}>
         {children}
       </TouchableOpacity>
     )
