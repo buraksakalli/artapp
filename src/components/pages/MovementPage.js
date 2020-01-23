@@ -1,15 +1,19 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, ScrollView, TouchableOpacity, ImageBackground, ActivityIndicator, FlatList, Image } from 'react-native'
+import { Text, View, StyleSheet, ScrollView } from 'react-native'
 import Header from 'components/atoms/header';
 import { Fonts } from 'utils/Fonts';
 import MenuIcon from 'components/molecules/menuIcon';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import Screen from 'utils/Screen';
-import MovementPicture from 'components/atoms/MovementPicture';
+import MovementPicture from 'containers/MovementPicture';
 import PageTitles from 'components/molecules/PageTitles';
-import {Text as ArticleText} from 'components/atoms/Text';
-import { ContentCard } from 'components/molecules/cards/ContentCard';
+import { Text as ArticleText } from 'components/atoms/Text';
+import MovementPageBlock from 'containers/MovementPageBlock';
+import Loading from 'components/atoms/loading';
+import Error from 'components/atoms/error';
+import {getMovement} from 'utils/Queries';
+
 
 
 export default class MovementPage extends Component {
@@ -29,10 +33,9 @@ export default class MovementPage extends Component {
     })
   }
 
-  artistPressed = (id) => {
-    const { navigation } = this.props;
-    navigation.push('ArtistPage', {
-      itemId: id
+  onCompleted = (artistCount) => {
+    this.setState({
+      artistCounter: artistCount
     })
   }
 
@@ -105,16 +108,16 @@ export default class MovementPage extends Component {
         <MenuIcon />
         <Header />
         <ScrollView style={style.container}>
-          <Query pollInterval={500} query={gql`{movement(_id: "${this.state.movementID}"){ name description }}`}>
+          <Query pollInterval={500} query={getMovement(this.state.movementID)}>
             {({ loading, error, data }) => {
-              if (loading || error) {
-                return null;
-              }
+              if (loading) return <Loading />;
+              if (error) return <Error errorMessage={error.message} />
               const { movement } = data;
+
               return (
                 <View>
                   <View style={style.header}>
-                    <PageTitles title={movement.name} subtitle="Art Movement"/>
+                    <PageTitles title={movement.name} subtitle="Art Movement" />
                     <MovementPicture movementId={this.state.movementID} />
                   </View>
                   <ArticleText variant="article">{movement.description}</ArticleText>
@@ -125,29 +128,7 @@ export default class MovementPage extends Component {
           </Query>
           <View style={style.section}>
             <View style={style.wrapper}>
-              <Query
-                pollInterval={500}
-                query={gql`{artists(movementId: "${this.state.movementID}"){_id name picture born{date} died{date} description }}`}
-                onCompleted={data => this.setState({ artistCounter: data.artists.length })}>
-                  {({ loading, error, data }) => {
-                    if (loading || error) {
-                      return null;
-                    }
-                    return (
-                      data.artists.map(artist => {
-                        const bornDate = new Date(parseInt(artist.born.date)).getFullYear()
-                        const diedDate = new Date(parseInt(artist.died.date)).getFullYear()
-                        const date = `${bornDate} - ${diedDate}`;
-                        return <ContentCard
-                          date={date}
-                          title={artist.name}
-                          pictureUrl={artist.picture}
-                          onPress={() => {this.artistPressed(artist._id)}}
-                        />
-                      })
-                    );
-                  }}
-              </Query>
+              <MovementPageBlock movementId={this.state.movementID} onCompleted={this.onCompleted} />
             </View>
           </View>
         </ScrollView>

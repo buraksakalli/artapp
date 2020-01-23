@@ -1,12 +1,15 @@
 import React, { Component } from 'react'
-import { Text, View, StyleSheet, ImageBackground, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { Text, View, StyleSheet, ImageBackground, ScrollView, TouchableOpacity } from 'react-native'
 import Header from 'components/atoms/header';
 import { Fonts } from 'utils/Fonts';
 import Screen from 'utils/Screen';
-import Content from 'components/ArtistContent';
+import Content from 'containers/ArtistContent';
 import MenuIcon from 'components/molecules/menuIcon';
-import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
+import Loading from 'components/atoms/loading';
+import Error from 'components/atoms/error';
+import { getArtist } from 'utils/Queries';
+
 
 export default class ArtistPage extends Component {
   constructor(props) {
@@ -62,19 +65,11 @@ export default class ArtistPage extends Component {
         <MenuIcon />
         <View style={style.container}>
           <Header />
-
-          <Query pollInterval={500} query={gql`{artist(_id: "${this.state.itemId}"){_id name picture born{date} died{date} description }}`}>
+          <Query pollInterval={500} query={getArtist(this.state.itemId)}>
             {({ loading, error, data }) => {
-              if (loading) return (
-                <View style={style.activity}>
-                  <ActivityIndicator size="large" color="#0000ff" />
-                </View>
-              );
-              if (error) return (
-                <View style={style.activity}>
-                  <Text>`Error! ${error.message}`</Text>
-                </View>
-              );
+              if (loading) return <Loading />
+              if (error) return <Error errorMessage={error.message} />
+
               const { artist } = data;
 
               var date = {

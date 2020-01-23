@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, FlatList } from 'react-native'
+import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity, FlatList } from 'react-native'
 import { withNavigation } from 'react-navigation';
-import Screen from '../utils/Screen';
-import { Fonts } from '../utils/Fonts';
-import gql from 'graphql-tag';
+import Screen from 'utils/Screen';
+import { Fonts } from 'utils/Fonts';
 import { Query } from 'react-apollo';
+import Error from 'components/atoms/error';
+import Loading from 'components/atoms/loading';
+import { getPaintingsByArtist } from 'utils/Queries';
 
 class ArtistContent extends Component {
   constructor(props) {
@@ -97,19 +99,10 @@ class ArtistContent extends Component {
         </View>
         <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
           <View style={style.paintingsWrapper}>
-            <Query pollInterval={500} query={gql`{paintings(artistId:"${artist._id}"){_id name date picture}}`} onCompleted={data => this.setState({ paintingCount: data.paintings.length })}>
+            <Query pollInterval={500} query={getPaintingsByArtist(artist._id)} onCompleted={data => this.setState({ paintingCount: data.paintings.length })}>
               {({ loading, error, data }) => {
-                if (loading) return (
-                  <View style={style.activity}>
-                    <ActivityIndicator size="large" color="#0000ff" />
-                  </View>
-                );
-                if (error) return (
-                  <View style={style.activity}>
-                    <Text>`Error! ${error.message}`</Text>
-                  </View>
-                );
-                  console.log(data)
+                if (loading) return <Loading />
+                if (error) return <Error errorMessage={error.message} />
                 return (
                   <FlatList
                     horizontal={true}

@@ -1,12 +1,14 @@
 import React, { Component } from 'react'
-import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native'
+import { Text, View, Image, StyleSheet, ScrollView, TouchableOpacity } from 'react-native'
 import Screen from 'utils/Screen'
 import { Fonts } from 'utils/Fonts';
 import Header from 'components/atoms/header';
 import MenuIcon from 'components/molecules/menuIcon';
-import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import { withNavigation } from 'react-navigation';
+import Loading from 'components/atoms/loading';
+import Error from 'components/atoms/error';
+import { getPainting } from 'utils/Queries';
 
 class PaintingPage extends Component {
 
@@ -69,18 +71,10 @@ class PaintingPage extends Component {
       <View>
         <MenuIcon />
         <Header />
-        <Query pollInterval={500} query={gql`{painting(_id: "${this.state.paintingID}"){_id name date picture artist{name} genre location{country city museum} movement{name} dimensions{width height unit}}}`}>
+        <Query pollInterval={500} query={getPainting(this.state.paintingID)}>
           {({ loading, error, data }) => {
-            if (loading) return (
-              <View style={style.activity}>
-                <ActivityIndicator size="large" color="#0000ff" />
-              </View>
-            );
-            if (error) return (
-              <View style={style.activity}>
-                <Text>`Error! ${error.message}`</Text>
-              </View>
-            );
+            if (loading) return <Loading />
+            if (error) return <Error errorMessage={error.message} />
             const { painting } = data;
             return (
               <ScrollView>

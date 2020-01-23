@@ -1,4 +1,4 @@
-import { Text, View, Dimensions } from 'react-native'
+import { Dimensions } from 'react-native'
 
 class Screen {
   static getDimension = () => {
