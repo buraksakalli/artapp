@@ -29,5 +29,8 @@ Please make sure to update tests as appropriate.
 ## Backend
 You can also check [backend repository](https://github.com/buraksakalli/artapp-graphql)
 
+## Screenshot
+![artapp](https://user-images.githubusercontent.com/10114716/73002173-a6631200-3e14-11ea-91d8-6f4a482ac0dd.JPG)
+
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)

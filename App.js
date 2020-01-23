@@ -16,7 +16,7 @@ import { ApolloProvider } from 'react-apollo';
 
 const AppNavigator = createStackNavigator(
   {
-    Home: Menu,
+    Home: SplashScreen,
     ArtistPage: ArtistPage,
     MainPage: MainPage,
     MovementPage: MovementPage,
