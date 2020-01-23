@@ -3,8 +3,10 @@ import { Text, View, TouchableOpacity, StyleSheet } from 'react-native'
 import { Fonts } from 'utils/Fonts';
 import Screen from 'utils/Screen';
 import Header from 'components/atoms/header';
+import { withNavigation } from 'react-navigation';
+import { getAllArtists, getAllPaintings, getAllMovements } from 'utils/Queries';
 
-export default class Menu extends Component {
+class Menu extends Component {
   constructor(props) {
     super(props)
     this.state = ({
@@ -13,8 +15,26 @@ export default class Menu extends Component {
   }
 
   menuItemPressed = (target) => {
-    const { navigate } = this.props.navigation;
-    navigate(target)
+    let targetPage, query;
+    const { navigation } = this.props;
+    if (target == "Artists") {
+      targetPage = "ArtistPage";
+      query = getAllArtists;
+    }
+
+    if (target == "Masterpieces") {
+      targetPage = "PaintingPage";
+      query = getAllPaintings;
+    }
+    if (target == "Movements") {
+      targetPage = "MovementPage";
+      query = getAllMovements;
+    }
+    navigation.push("General", {
+      targetPage: targetPage,
+      query: query,
+      title: target
+    })
   }
 
   closeButtonPressed = (target) => {
@@ -66,3 +86,4 @@ export default class Menu extends Component {
     )
   }
 }
+export default withNavigation(Menu)
